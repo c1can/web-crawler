@@ -9,8 +9,13 @@ function getAnchors(htmlBody, baseURL) {
     const dom = new JSDOM(htmlBody)
 
     const selectedAnchors = dom.window.document.querySelectorAll("a")
+
     
     selectedAnchors.forEach(anchor => {
+        
+        if(!anchor.href) {
+            return
+        }
 
         if(anchor.href[0] == "/") { //check for relative path
             anchors.push(`${baseURL}${anchor.href}`)
@@ -19,7 +24,7 @@ function getAnchors(htmlBody, baseURL) {
                 const urlObj = new URL(anchor.href)
                 anchors.push(urlObj.href)
             } catch (error) {
-                console.log(error.message)       
+                console.log("?",error.message)       
             }
         }
     })
