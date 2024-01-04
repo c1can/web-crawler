@@ -8,7 +8,7 @@ async function readFromTerminal() {
    } else {
         const validatedURL = normalizeURL(input[2])
 
-        if(validatedURL == "Invalid URL") {
+        if(!validatedURL) {
           console.log("write a valid url")
         }else{
          const report = await crawler(validatedURL, validatedURL, {})

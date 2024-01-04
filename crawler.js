@@ -37,11 +37,11 @@ async function crawler(validatedURL, currentURL, pages) {
 
     const validatedCurrentURL = normalizeURL(currentURL)
 
-    console.log(baseURL)
-    console.log(validatedCurrentURL)
+    //console.log(baseURL)
+    //console.log(validatedCurrentURL)
 
     
-    if(validatedCurrentURL == "Invalid URL") {
+    if(!validatedCurrentURL) {
         return pages
     }
 
@@ -61,8 +61,8 @@ async function crawler(validatedURL, currentURL, pages) {
         pages[validatedCurrentURL] = 1
 
     try {
-        console.log("starting crawl...")
         const response = await fetch(validatedCurrentURL)
+        console.log("starting crawl...")
 
         //check content type to be just html
         const contentType = response.headers.get("content-type")
@@ -102,7 +102,7 @@ function normalizeURL(url) {
         }
         return hostpath
     } catch (error) {
-        return error.message
+        return false
     }
 }
 
