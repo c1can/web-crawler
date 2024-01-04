@@ -62,22 +62,23 @@ async function crawler(validatedURL, currentURL, pages) {
 
     try {
         const response = await fetch(validatedCurrentURL)
-        console.log("starting crawl...")
-
+        
         //check content type to be just html
         const contentType = response.headers.get("content-type")
-
+        
         if(!contentType.includes("text/html")) {
-            console.log("failed to crawl...")
-            console.log("provide an url for a html page!")
+            console.log("not html page: ",validatedCurrentURL)
             return pages
         }
-        const htmlResponse = await response.text()
+         console.log("crawling: ", validatedCurrentURL)
+
+         let htmlResponse = ''
+         htmlResponse = await response.text()
 
         const anchorsArray = getAnchors(htmlResponse, baseURL)
 
         for(const anchor of anchorsArray) {
-            console.log(anchor)
+            //console.log(anchor)
             pages = await crawler(baseURL, anchor, pages)
         }
 
