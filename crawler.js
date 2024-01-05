@@ -113,8 +113,16 @@ function normalizeURL(url) {
 }
 
 
+function dontBeFunny(validURL) {
+    const { hostname } = new URL(validURL)
+
+    return hostname.includes("wikipedia")
+}
+
+
 module.exports = {
     normalizeURL, 
     getAnchors,
-    crawler
+    crawler,
+    dontBeFunny
 }

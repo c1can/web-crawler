@@ -1,4 +1,4 @@
-const { normalizeURL, crawler } = require("./crawler.js")
+const { normalizeURL, crawler, dontBeFunny } = require("./crawler.js")
 
 async function readFromTerminal() {
     const input = process.argv
@@ -10,6 +10,8 @@ async function readFromTerminal() {
 
         if(!validatedURL) {
           console.log("write a valid url")
+        }else if(dontBeFunny(validatedURL)) {
+          console.log("dont be funny...")
         }else{
          const report = await crawler(validatedURL, validatedURL, {})
 
